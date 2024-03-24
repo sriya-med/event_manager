@@ -1,0 +1,31 @@
+<!-- events/event_detail.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Detail</title>
+</head>
+<body>
+    <h1>{{ event.event_name }}</h1>
+    <p><strong>Date:</strong> {{ event.event_date }}</p>
+    <p><strong>Location:</strong> {{ event.event_location }}</p>
+    <p><strong>Description:</strong> {{ event.description }}</p>
+    
+    <h2>Participants:</h2>
+    <ul>
+        {% for participant in event.participants.all %}
+            <li>{{ participant.username }}</li>
+        {% empty %}
+            <li>No participants yet</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Add a form for signing up to the event -->
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Sign Up</button>
+    </form>
+</body>
+</html>
